@@ -18,8 +18,8 @@ client_scripts {
 files {
     'interface/index.html',
     'interface/assets/images/bg.jpg',
-    'interface/assets/images/bg-2.jpg',
     'interface/assets/images/speed.png',
+    'interface/assets/images/glow.gif',
     'interface/assets/styles/styles.css',
     'interface/assets/styles/reset.css',
     'interface/listener.js'

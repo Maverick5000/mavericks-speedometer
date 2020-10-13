@@ -18,6 +18,7 @@ $(function () {
             }, 500);
         }
       } else if (item !== undefined && item.type === "speed") {
+        $(".gauge-a").css({ transform: 'rotate(' + (item.percent * 0.005) + 'turn)', transition: 'transform 1s linear'});
         $("#speed").text(item.value);
       } else if (item !== undefined && item.type === "fuel") {
         $(".fuel").text('Fuel : ' + item.value + ' %');

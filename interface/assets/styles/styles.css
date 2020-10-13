@@ -1,3 +1,7 @@
+body {
+  overflow: hidden;
+}
+
 #container {
   width: 100%;
   height: 100%;
@@ -30,10 +34,23 @@
   margin-left: 80%;
 }
 
+.cover {
+  position: absolute;
+  width: 80%;
+  height: 110%;
+  top: -7%;
+  left: 12.5%;
+  background-color: transparent;
+  border-radius: 50%;
+  z-index: -1;
+  overflow: hidden;
+}
+
 .overlay {
   width: 75%;
   height: 65%;
-  background-image: url('../images/bg-2.jpg');
+  background-color: transparent;
+  background-image: url('../images/bg.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -44,13 +61,13 @@
   margin-left: 15%;
   margin-top: 30%;
   overflow: hidden;
+  z-index: 2;
 }
 
 .pad {
-  padding-top: 2%;
-  padding-left: 2%;
-  overflow: hidden;
+  /* overflow: hidden; */
   margin-left: auto;
+  width: auto;
 }
 
 .small {
@@ -63,7 +80,7 @@
 }
 
 .fuel {
-  font-size: 1rem;
+  font-size: rem;
 }
 
 .speed {
@@ -128,3 +145,49 @@
   -moz-animation: glow-red 1s ease-in-out infinite alternate;
   animation: glow-red 1s ease-in-out infinite alternate;
 }
+
+.gauge-container {
+  position: absolute;
+  height: 26%;
+  width: 15%;
+  overflow: hidden;
+}
+
+.gauge-b {
+  z-index: 1;
+  position: absolute;
+  background-color: black;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 0px 0px 200px 200px;
+  transform-origin: center top;
+  transition: all 1.3s ease-in-out;
+  box-shadow:
+        inset 0 0 50px #fff,      /* inner white */
+        inset 20px 0 80px #f0f,   /* inner left magenta short */
+        inset -20px 0 80px #0ff,  /* inner right cyan short */
+        inset 20px 0 300px #f0f,  /* inner left magenta broad */
+        inset -20px 0 300px #0ff, /* inner right cyan broad */
+        0 0 50px #fff,            /* outer white */
+        -10px 0 80px #f0f,        /* outer left magenta */
+        10px 0 80px #0ff;         /* outer right cyan */
+}
+
+.gauge-a {
+  z-index: -2;
+  position: absolute;
+  background-image: url('../images/glow.gif');
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  top: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 15px 15px 200px 200px;
+  transform-origin: center top;
+}
+
+/* .pad:hover .gauge-a {  transform:rotate(0.5turn); } */

@@ -1,5 +1,7 @@
 setTick(() => {
-  checkValues();
+  setImmediate(() => {
+    checkValues();
+  });
 });
 
 checkValues = async () => {
@@ -9,17 +11,21 @@ checkValues = async () => {
     await Wait(1000);
     vehicle = GetVehiclePedIsIn(ped);
     fuel = GetVehicleFuelLevel(vehicle);
-    speed = GetEntitySpeed(vehicle) * 3.6;
+    speed = GetEntitySpeed(vehicle)
+    vehicleMax = GetVehicleEstimatedMaxSpeed(vehicle);
+    percent = (speed * 100) / ((0.20 * vehicleMax) + vehicleMax)
+    speedKm = speed * 3.6;
     SendNuiMessage(
       JSON.stringify({
         type: "speed",
-        value: Math.floor(speed),
+        value: Math.floor(speedKm),
+        percent: percent < 101 ? percent : 100
       })
     );
     SendNuiMessage(
       JSON.stringify({
         type: "fuel",
-        value: fuel,
+        value: Math.trunc(fuel),
       })
     );
   } else {
