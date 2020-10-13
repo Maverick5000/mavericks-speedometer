@@ -4,11 +4,10 @@ setTick(() => {
   });
 });
 
-checkValues = async () => {
+checkValues = () => {
   ped = GetPlayerPed(-1, false);
   if (IsPedInAnyVehicle(ped)) {
     toogleVehicleUi(true);
-    await Wait(1000);
     vehicle = GetVehiclePedIsIn(ped);
     fuel = GetVehicleFuelLevel(vehicle);
     speed = GetEntitySpeed(vehicle)
