@@ -1,34 +1,38 @@
-setTick(() => {
-  setImmediate(() => {
-    checkValues();
-  });
+const ped = GetPlayerPed(-1, false);
+let vehicle = null;
+
+setTick(async () => {
+  if (IsPedInAnyVehicle(ped)) {
+    vehicle = GetVehiclePedIsIn(ped);
+    vehicleMax = GetVehicleEstimatedMaxSpeed(vehicle);
+    toogleVehicleUi(true);
+  } else {
+    toogleVehicleUi(false);
+  }
+  await Wait(1000);
 });
 
-checkValues = () => {
-  ped = GetPlayerPed(-1, false);
+setTick(() => {
   if (IsPedInAnyVehicle(ped)) {
-    toogleVehicleUi(true);
-    vehicle = GetVehiclePedIsIn(ped);
+    sendValues();
+  }
+});
+
+sendValues = () => {
+  if (vehicle) {
     fuel = GetVehicleFuelLevel(vehicle);
     speed = GetEntitySpeed(vehicle)
-    vehicleMax = GetVehicleEstimatedMaxSpeed(vehicle);
     percent = (speed * 100) / ((0.20 * vehicleMax) + vehicleMax)
     speedKm = speed * 3.6;
+
     SendNuiMessage(
       JSON.stringify({
         type: "speed",
-        value: Math.floor(speedKm),
-        percent: percent < 101 ? percent : 100
+        speed: Math.floor(speedKm),
+        percent: percent < 101 ? percent : 100,
+        fuel: Math.trunc(fuel)
       })
     );
-    SendNuiMessage(
-      JSON.stringify({
-        type: "fuel",
-        value: Math.trunc(fuel),
-      })
-    );
-  } else {
-    toogleVehicleUi(false);
   }
 };
 
@@ -40,31 +44,3 @@ toogleVehicleUi = (bool) => {
     })
   );
 };
-
-on("nui:on", async () => {
-  toogleVehicleUi(true);
-});
-
-RegisterCommand(
-  "on",
-  (source, args, raw) => {
-    setImmediate(() => {
-      emit("nui:on");
-    });
-  },
-  false
-);
-
-on("nui:off", () => {
-  toogleVehicleUi(false);
-});
-
-RegisterCommand(
-  "off",
-  (source, args, raw) => {
-    setImmediate(() => {
-      emit("nui:off");
-    });
-  },
-  false
-);
