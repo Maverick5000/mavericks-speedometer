@@ -1,5 +1,5 @@
 # mavericks-speedometer
-Speedometer HUD for fiveM servers
+Standalone Speedometer HUD for fiveM servers
 
 ![Alt text](https://i.ibb.co/r7mTf8K/MS.png)
 ![Alt text](https://s8.gifyu.com/images/speed.gif)
